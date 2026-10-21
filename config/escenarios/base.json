@@ -1,0 +1,114 @@
+{
+    "nombre": "base",
+    "descripcion": "Escenario oficial de la actividad: 8 satélites, 6 regiones, 3 zonas de desechos y 2 objetos ocupados.",
+    "num_satelites": 8,
+    "altitud_km": 800,
+    "radio_vision_grados": 10.0,
+    "separacion_minima_grados": 2.0,
+    "radio_region_km": 300,
+    "umbral_cobertura": 0.9,
+    "pesos_prioridad": {
+        "alta": 3,
+        "media": 2,
+        "normal": 1
+    },
+    "regiones": [
+        {
+            "id": "yucatan",
+            "nombre": "Península de Yucatán, México",
+            "lat": 20.5,
+            "lon": -89.0,
+            "prioridad": "alta"
+        },
+        {
+            "id": "amazonia",
+            "nombre": "Amazonía brasileña",
+            "lat": -3.5,
+            "lon": -62.0,
+            "prioridad": "alta"
+        },
+        {
+            "id": "california",
+            "nombre": "California, Estados Unidos",
+            "lat": 36.8,
+            "lon": -119.4,
+            "prioridad": "media"
+        },
+        {
+            "id": "sahel",
+            "nombre": "Región del Sahel, África",
+            "lat": 15.0,
+            "lon": 0.0,
+            "prioridad": "media"
+        },
+        {
+            "id": "japon",
+            "nombre": "Japón",
+            "lat": 36.0,
+            "lon": 138.0,
+            "prioridad": "media"
+        },
+        {
+            "id": "australia",
+            "nombre": "Interior de Australia",
+            "lat": -25.0,
+            "lon": 133.0,
+            "prioridad": "normal"
+        }
+    ],
+    "zonas_restringidas": [
+        {
+            "id": "atlantico_norte",
+            "nombre": "Atlántico Norte",
+            "lat": 45.0,
+            "lon": -35.0,
+            "radio_grados": 12
+        },
+        {
+            "id": "pacifico_sur",
+            "nombre": "Pacífico Sur",
+            "lat": -30.0,
+            "lon": -120.0,
+            "radio_grados": 10
+        },
+        {
+            "id": "polar_norte",
+            "nombre": "Región polar norte",
+            "lat": 78.0,
+            "lon": 30.0,
+            "radio_grados": 8
+        }
+    ],
+    "objetos_ocupados": [
+        {
+            "id": "objeto_a",
+            "nombre": "Objeto A",
+            "lat": 10.0,
+            "lon": 45.0,
+            "radio_grados": 5
+        },
+        {
+            "id": "objeto_b",
+            "nombre": "Objeto B",
+            "lat": -15.0,
+            "lon": 110.0,
+            "radio_grados": 5
+        }
+    ],
+    "ga": {
+        "poblacion": 60,
+        "generaciones": 200,
+        "prob_cruza": 0.9,
+        "prob_mutacion": 0.15,
+        "sigma_mutacion": 5.0,
+        "prob_reubicar": 0.03,
+        "torneo_k": 3,
+        "elitismo": 2,
+        "paciencia": 80,
+        "semilla": 42
+    },
+    "criterio_suficiente": {
+        "cobertura_ponderada_minima": 0.95,
+        "todas_las_alta_cubiertas": true
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "hereda_de": "base.json",
+    "nombre": "inviable",
+    "descripcion": "Condición inviable: una nube de desechos de 15° cubre todo el Golfo de México. Ningún satélite válido puede ver Yucatán (su alcance es 10°), así que es imposible cubrir todas las regiones.",
+    "zonas_restringidas_extra": [
+        {
+            "id": "golfo_mexico",
+            "nombre": "Golfo de México (nueva)",
+            "lat": 21.0,
+            "lon": -89.0,
+            "radio_grados": 15
+        }
+    ]
+}

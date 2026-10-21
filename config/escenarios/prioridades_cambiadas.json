@@ -1,0 +1,18 @@
+{
+    "hereda_de": "base.json",
+    "nombre": "prioridades_cambiadas",
+    "descripcion": "Cambio de condiciones (3.3): Australia sube a Alta, Yucatán baja a Normal y aparece una zona de desechos sobre Japón.",
+    "cambiar_prioridades": {
+        "australia": "alta",
+        "yucatan": "normal"
+    },
+    "zonas_restringidas_extra": [
+        {
+            "id": "sobre_japon",
+            "nombre": "Desechos sobre Japón (nueva)",
+            "lat": 36.0,
+            "lon": 138.0,
+            "radio_grados": 6
+        }
+    ]
+}

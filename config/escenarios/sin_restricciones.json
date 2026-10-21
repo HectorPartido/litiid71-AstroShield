@@ -1,0 +1,12 @@
+{
+    "hereda_de": "base.json",
+    "nombre": "sin_restricciones",
+    "descripcion": "Primera etapa: mismo problema SIN zonas de desechos ni objetos ocupados. Sirve para medir el efecto de las restricciones.",
+    "quitar_zonas": [
+        "atlantico_norte",
+        "pacifico_sur",
+        "polar_norte",
+        "objeto_a",
+        "objeto_b"
+    ]
+}

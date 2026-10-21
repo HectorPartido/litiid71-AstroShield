@@ -1,0 +1,28 @@
+{
+    "hereda_de": "base.json",
+    "nombre": "reducido",
+    "descripcion": "Espacio reducido: se agregan 3 zonas de desechos cerca de Yucatán, la Amazonía y Japón. Sigue siendo posible cubrir todo, pero con menos lugares disponibles.",
+    "zonas_restringidas_extra": [
+        {
+            "id": "mar_caribe",
+            "nombre": "Mar Caribe (nueva)",
+            "lat": 17.0,
+            "lon": -82.0,
+            "radio_grados": 7
+        },
+        {
+            "id": "brasil_central",
+            "nombre": "Brasil central (nueva)",
+            "lat": -12.0,
+            "lon": -55.0,
+            "radio_grados": 7
+        },
+        {
+            "id": "mar_de_japon",
+            "nombre": "Mar de Japón (nueva)",
+            "lat": 40.0,
+            "lon": 133.0,
+            "radio_grados": 5
+        }
+    ]
+}
