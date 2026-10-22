@@ -1,0 +1,10 @@
+[
+ {
+  "archivo": "base_s42.json",
+  "escenario": "base",
+  "semilla": 42,
+  "fitness": 1.0,
+  "valida": true,
+  "regiones_cubiertas": 6
+ }
+]
