@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AstroShield — Visor 3D</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+      "topojson-client": "https://cdn.jsdelivr.net/npm/topojson-client@3/+esm"
+    }
+  }
+  </script>
+</head>
+
+<body>
+    <div id="escena"></div>
+
+    <aside id="panel">
+        <header>
+            <h1>AstroShield</h1>
+            <p class="sub">Constelación evolutiva · visor 3D</p>
+        </header>
+
+        <section>
+            <label for="selector">Ejecución</label>
+            <select id="selector"></select>
+            <div class="modos" role="group" aria-label="Configuración a mostrar">
+                <button data-modo="final" class="activo">Final</button>
+                <button data-modo="inicial">Inicial</button>
+                <button data-modo="ambas">Comparar</button>
+            </div>
+        </section>
+
+        <section id="resumen"></section>
+
+        <section>
+            <h2>Evolución del fitness</h2>
+            <canvas id="grafica" width="320" height="140"></canvas>
+            <div class="leyenda-grafica">
+                <span><i class="l-mejor"></i>mejor</span>
+                <span><i class="l-prom"></i>promedio</span>
+                <span><i class="l-val"></i>% válidos</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Regiones</h2>
+            <table id="tabla-regiones"></table>
+        </section>
+
+        <section id="violaciones"></section>
+
+        <section>
+            <h2>Capas</h2>
+            <div class="capas">
+                <label><input type="checkbox" data-capa="huellas" checked> Alcance de satélites</label>
+                <label><input type="checkbox" data-capa="zonas" checked> Zonas restringidas</label>
+                <label><input type="checkbox" data-capa="ocupados" checked> Objetos ocupados</label>
+                <label><input type="checkbox" data-capa="etiquetas" checked> Etiquetas</label>
+                <label><input type="checkbox" id="girar"> Girar automáticamente</label>
+            </div>
+        </section>
+
+        <section class="simbologia">
+            <h2>Simbología</h2>
+            <ul>
+                <li><i style="background:var(--cubierta)"></i>Región cubierta</li>
+                <li><i style="background:var(--parcial)"></i>Región con cobertura parcial</li>
+                <li><i style="background:var(--descubierta)"></i>Región sin cubrir</li>
+                <li><i style="background:var(--satelite)"></i>Satélite y su alcance</li>
+                <li><i style="background:var(--inicial)"></i>Satélite de la configuración inicial</li>
+                <li><i style="background:var(--desechos)"></i>Zona de desechos</li>
+                <li><i style="background:var(--ocupado)"></i>Objeto ocupado y su exclusión</li>
+            </ul>
+            <p class="nota">Arrastra para girar el globo, rueda para acercar. Todo lo que se dibuja sale del archivo de
+                resultados seleccionado.</p>
+        </section>
+    </aside>
+
+    <div id="aviso" hidden></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
