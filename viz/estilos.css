@@ -1,0 +1,321 @@
+/* AstroShield — estilos del visor 3D
+   Responsable: Ismael Alexander Hidalgo Aguilando */
+
+:root {
+    --fondo: #05070d;
+    --panel: rgba(12, 17, 28, 0.92);
+    --borde: #1f2a3d;
+    --texto: #dbe4f3;
+    --tenue: #8796ad;
+    --acento: #4fc3f7;
+
+    --cubierta: #34d399;
+    --parcial: #fbbf24;
+    --descubierta: #f43f5e;
+    --satelite: #38bdf8;
+    --inicial: #a3a3a3;
+    --desechos: #ef4444;
+    --ocupado: #f97316;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+#escena {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 384px;
+}
+
+#panel {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: 360px;
+    overflow-y: auto;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: 16px 18px;
+    backdrop-filter: blur(6px);
+}
+
+h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    margin: 0 0 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--tenue);
+}
+
+.sub {
+    margin: 2px 0 0;
+    color: var(--tenue);
+}
+
+section {
+    margin-top: 18px;
+}
+
+label {
+    display: block;
+    color: var(--tenue);
+    margin-bottom: 6px;
+}
+
+select {
+    width: 100%;
+    padding: 7px 8px;
+    background: #0d1320;
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+}
+
+.modos {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.modos button {
+    flex: 1;
+    padding: 7px 0;
+    background: #0d1320;
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modos button.activo {
+    background: var(--acento);
+    color: #04121c;
+    border-color: var(--acento);
+    font-weight: 600;
+}
+
+.metricas {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 4px 12px;
+}
+
+.metricas .enc {
+    color: var(--tenue);
+    font-size: 12px;
+    text-align: right;
+}
+
+.metricas .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.metricas .mejora {
+    color: var(--cubierta);
+}
+
+.etiqueta-estado {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.etiqueta-estado.ok {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--cubierta);
+}
+
+.etiqueta-estado.mal {
+    background: rgba(244, 63, 94, 0.15);
+    color: var(--descubierta);
+}
+
+.meta {
+    color: var(--tenue);
+    font-size: 12px;
+    margin: 6px 0 10px;
+}
+
+#grafica {
+    width: 100%;
+    height: 140px;
+    background: #0a0f19;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+}
+
+.leyenda-grafica {
+    display: flex;
+    gap: 12px;
+    color: var(--tenue);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.leyenda-grafica i {
+    display: inline-block;
+    width: 14px;
+    height: 3px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.l-mejor {
+    background: var(--acento);
+}
+
+.l-prom {
+    background: #c084fc;
+}
+
+.l-val {
+    background: #64748b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    padding: 4px 2px;
+    border-bottom: 1px solid var(--borde);
+    font-size: 13px;
+}
+
+th {
+    color: var(--tenue);
+    font-weight: 500;
+    text-align: left;
+    font-size: 12px;
+}
+
+td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.punto {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+#violaciones ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--descubierta);
+}
+
+.capas label {
+    color: var(--texto);
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.simbologia ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.simbologia li {
+    margin-bottom: 4px;
+}
+
+.simbologia i {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: -1px;
+}
+
+.nota {
+    color: var(--tenue);
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* Etiquetas 3D (CSS2DRenderer) */
+.etq {
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: rgba(5, 7, 13, 0.75);
+    color: var(--texto);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.etq.sat {
+    color: var(--satelite);
+}
+
+.etq.ini {
+    color: var(--inicial);
+}
+
+.etq.zona {
+    color: var(--desechos);
+}
+
+.etq.obj {
+    color: var(--ocupado);
+}
+
+#aviso {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    max-width: 460px;
+    padding: 10px 14px;
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid var(--descubierta);
+    border-radius: 8px;
+}
+
+@media (max-width: 760px) {
+    #escena {
+        right: 0;
+        bottom: 45vh;
+    }
+
+    #panel {
+        top: auto;
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        width: auto;
+        height: 45vh;
+    }
+}
