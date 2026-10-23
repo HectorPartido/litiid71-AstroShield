@@ -104,14 +104,14 @@ Algoritmo genético generacional con elitismo:
 | `separacion_minima_grados` | 2° | Decisión del equipo |
 | `peso_redundancia` | 0.10 | Ver sección 3 (calibrado con la prueba P11) |
 | `poblacion` | 60 | Alrededor de 7 veces el número de satélites. Evaluar 60 individuos tarda milisegundos. |
-| `generaciones` | 200 | En pruebas preliminares la mejora se detiene antes de la generación 150 |
+| `generaciones` | 300 | Límite superior. Se subió de 200 a 300 junto con la paciencia (ver prueba P12). |
 | `prob_cruza` | 0.9 | Valor típico de la literatura de AG |
 | `prob_mutacion` | 0.15 | ≈ 1/8 satélites → en promedio 1 satélite mutado por hijo |
 | `sigma_mutacion` | 5° | Menor que el radio de visión (10°): ajusta sin "perder" la región |
 | `prob_reubicar` | 0.03 | Pequeña: exploración ocasional sin destruir buenas soluciones |
 | `torneo_k` | 3 | Presión selectiva moderada |
 | `elitismo` | 2 | Conserva las 2 mejores |
-| `paciencia` | 80 | Generaciones sin mejora antes de detenerse |
+| `paciencia` | 150 | Generaciones sin mejora antes de detenerse. Con 80, la semilla 42 se detenía en un óptimo local con 5/6 regiones; con 150 alcanza 6/6 (prueba P12). |
 | `semilla` | 42 | Reproducibilidad. Se varía en las pruebas de variación. |
 
 Los valores iniciales se toman de recomendaciones comunes para AG de codificación real y se ajustan con las pruebas del Entregable 3.

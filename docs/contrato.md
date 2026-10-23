@@ -51,7 +51,7 @@ Cada elemento de `regiones`:
 ```json
 {
   "escenario": { "...todo el escenario usado, incluye regiones, zonas_restringidas, objetos_ocupados..." },
-  "parametros": { "poblacion": 60, "generaciones": 200, "...": "..." },
+  "parametros": { "poblacion": 60, "generaciones": 300, "...": "..." },
   "semilla": 42,
   "generaciones_ejecutadas": 120,
   "gen_suficiente": 32,
