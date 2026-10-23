@@ -108,7 +108,7 @@ Momentos relevantes (la tabla completa está en `resumen.md`):
 
 Lo que muestra:
 
-- **La población inicial sí tiene configuraciones inválidas:** solo el 70% es válido en la generación 0; desde la generación 2 el 100% lo es.
+- **La población inicial sí tiene configuraciones inválidas:** solo el 70% es válido en la generación 0; desde la generación 2 se mantiene entre 95% y 100%.
 - **Mejora rápida al inicio:** de 1 a 5 regiones cubiertas en 9 generaciones.
 - **Meseta:** entre las generaciones 27 y 119 el mejor fitness se queda en 0.9308 (5/6 regiones). La generación 119 es la primera con las 6 regiones cubiertas (0.9388).
 - **El 1.0000 llega tarde:** hasta la generación 197, cuando el algoritmo coloca el respaldo de las dos regiones Alta.
@@ -266,11 +266,28 @@ La batería detectó dos defectos reales en lo que ya estaba entregado. Ambos se
 | Peso de redundancia 0.15: respaldar media región Alta (0.075) valía más que cubrir Australia (0.065) | P11: con 0.15, 1 de 10 corridas abandona Australia; la prueba `test_cubrir_una_region_nueva_vale_mas_que_un_respaldo` falla con 0.15 | El algoritmo puede dejar una región sin cubrir para reforzar otra | `peso_redundancia = 0.10`, configurable en el escenario |
 | Paciencia 80 y 200 generaciones: la semilla 42 se detenía en una meseta con 5/6 regiones | P12: 0.9308 contra 1.0000 con paciencia 150 | El algoritmo entrega una solución incompleta creyendo que ya no puede mejorar | Paciencia 150 y 300 generaciones |
 
-**Nota sobre la cifra de P11.** El Entregable 1 menciona una frecuencia mayor de ejecuciones con Australia abandonada en la primera detección del defecto. Esta batería, con la configuración final del algoritmo, mide **1 de 10** con peso 0.15. La cifra oficial de este documento es la de la batería. La diferencia entre 9 y 10 corridas es pequeña; el argumento más sólido para el cambio es la comparación de valores de arriba (0.075 contra 0.065), y P11 es la evidencia que lo respalda.
+**Nota sobre la cifra de P11.** El Entregable 1 menciona 3 de 10 ejecuciones con Australia abandonada: esa fue la primera detección del defecto, cuando el algoritmo todavía usaba paciencia 80. Esta batería, con la configuración final del algoritmo, mide **1 de 10** con peso 0.15. La cifra oficial de este documento es la de la batería. La diferencia entre 9 y 10 corridas es pequeña; el argumento más sólido para el cambio es la comparación de valores de arriba (0.075 contra 0.065), y P11 es la evidencia que lo respalda.
 
 ---
 
-## 6. Limitaciones de la validación
+## 6. Correspondencia entre los datos y la visualización
+
+El visor 3D (`viz/`) no tiene datos escritos en el código: lee `results/index.json` y `results/<escenario>_s42.json`, los mismos archivos de donde salen las tablas de este documento. Verificación hecha sobre la ejecución oficial:
+
+| Dato en los resultados | Lo que muestra el visor |
+|---|---|
+| `final.satelites`: S0 (24.66°, −90.76°) y S1 (25.33°, −85.87°) | Dos satélites sobre el Golfo de México, encima de Yucatán |
+| `regiones[yucatan].satelites_que_ven = [0, 1]` | Yucatán en verde; la tabla del panel dice "S0, S1" |
+| `inicial.evaluacion.fitness = 0.2077`, `final.evaluacion.fitness = 1.0` | Panel "Resultado": 0.2077 → 1.0000 |
+| `gen_suficiente = 119` | Línea punteada verde en la gráfica del panel y el texto "Suficientemente buena desde la generación 119" |
+| `inviable_s42.json`: `yucatan.cobertura = 0` | Yucatán en rojo con "0%" y la zona "Golfo de México (nueva)" dibujada |
+| `historial` | La gráfica del panel muestra la meseta de la generación 27 a la 119, igual que `p2_evolucion_base.png` |
+
+Además, los círculos del globo se trazan con la misma fórmula de punto destino que usa `src/astroshield/geo.py`, así que una región que el modelo da por cubierta queda dentro del círculo de alcance de su satélite.
+
+---
+
+## 7. Limitaciones de la validación
 
 - **Diez semillas** dan una buena idea de la variabilidad, pero no es un análisis estadístico formal; las diferencias pequeñas (por ejemplo 22 contra 28 generaciones medias entre `base` y `sin_restricciones`) no son concluyentes.
 - **La contraprueba de P3/P4 dio 0 inválidas.** La demostración de que las restricciones condicionan el resultado depende de P5, P6 y P10, no de esa contraprueba.

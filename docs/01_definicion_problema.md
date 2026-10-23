@@ -52,7 +52,7 @@ fitness = 0.90 × cobertura_ponderada + 0.10 × redundancia_alta      ∈ [0, 1]
 
 - **Por qué la redundancia:** hay 8 satélites y 6 regiones. Sin este término, los 2 satélites sobrantes no aportarían nada y el algoritmo los dejaría en cualquier lugar. Con él, se usan para respaldar las regiones más importantes (si un satélite falla, la región Alta sigue vigilada).
 - **Por qué 0.90 / 0.10:** el peso del respaldo es el parámetro `peso_redundancia` del escenario. Cubrir la región de menor peso (Australia, Normal) aporta 0.90 × 1/13 ≈ 0.069. Respaldar por completo una región Alta aporta 0.10 × ½ = 0.05. Así **cubrir una región nueva siempre vale más que reforzar una ya cubierta**.
-- **Corrección tras las pruebas:** la primera versión usaba 0.85 / 0.15. Con esos pesos, el respaldo de una región Alta (0.075) valía más que cubrir Australia (0.065). En 3 de 10 ejecuciones el algoritmo dejó Australia sin cubrir para poner un segundo satélite sobre Amazonía. La prueba P11 del Entregable 3 documenta el antes y el después.
+- **Corrección tras las pruebas:** la primera versión usaba 0.85 / 0.15. Con esos pesos, el respaldo de una región Alta (0.075) valía más que cubrir Australia (0.065). En la primera detección (todavía con el criterio de paro original de 80 generaciones), 3 de 10 ejecuciones dejaron Australia sin cubrir para poner un segundo satélite sobre Amazonía; con la configuración final del algoritmo la batería mide 1 de 10. La prueba P11 del Entregable 3 documenta el antes y el después.
 
 ## 4. Configuraciones inválidas
 

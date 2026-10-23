@@ -34,8 +34,8 @@ Ninguna de las **90 soluciones finales** revisadas invade una zona restringida. 
 Requiere **Python 3.10+** y **Git**. El visor necesita internet la primera vez para descargar Three.js.
 
 ```bash
-git clone https://github.com/HectorPartido/astroshield.git
-cd astroshield
+git clone https://github.com/HectorPartido/litiid71-AstroShield.git
+cd litiid71-AstroShield
 ```
 
 **Windows (PowerShell):**

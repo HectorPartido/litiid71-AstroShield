@@ -18,13 +18,13 @@ La actividad pide indicar si se usó IA, para qué se usó y qué verificaciones
 
 ## Qué verificó el equipo
 
-- [ ] Cada integrante instaló el proyecto en su propia computadora y ejecutó `pytest` (55 pruebas en verde).
-- [ ] Anthony ejecutó `python experiments/correr_pruebas.py` y comparó `results/experimentos/resumen.md` contra los números de los Entregables 3 y 4. Se corrigió cualquier diferencia.
-- [ ] Hector Martínez verificó a mano, con la calculadora, el fitness de la configuración ideal (1.0) y el máximo teórico del escenario inviable: 0.9·10/13 + 0.1·0.5 = 0.7423.
-- [ ] Gildardo ejecutó el CLI con varias semillas y confirmó que la misma semilla da el mismo resultado.
-- [ ] Ismael abrió el visor y comprobó que las coordenadas de los satélites en `results/base_s42.json` coinciden con lo que se ve en el globo. También revisó que el escenario inviable muestre Yucatán en rojo.
-- [ ] Hector Partido revisó cada Pull Request antes de fusionarlo.
-- [ ] Se revisaron las decisiones propuestas por la IA y el equipo las acepta como propias, en particular:
+- [x] Cada integrante instaló el proyecto en su propia computadora y ejecutó `pytest` (55 pruebas en verde).
+- [x] Anthony ejecutó `python experiments/correr_pruebas.py` y comparó `results/experimentos/resumen.md` contra los números de los Entregables 3 y 4. Se corrigió cualquier diferencia.
+- [x] Hector Martínez verificó a mano, con la calculadora, el fitness de la configuración ideal (1.0) y el máximo teórico del escenario inviable: 0.9·10/13 + 0.1·0.5 = 0.7423.
+- [x] Gildardo ejecutó el CLI con varias semillas y confirmó que la misma semilla da el mismo resultado.
+- [x] Ismael abrió el visor y comprobó que las coordenadas de los satélites en `results/base_s42.json` coinciden con lo que se ve en el globo. También revisó que el escenario inviable muestre Yucatán en rojo.
+- [x] Hector Partido revisó cada Pull Request antes de fusionarlo.
+- [x] Se revisaron las decisiones propuestas por la IA y el equipo las acepta como propias, en particular:
   - alcance de 10°;
   - umbral de 90 %;
   - separación mínima de 2°;

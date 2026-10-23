@@ -5,6 +5,18 @@
 
 Este documento interpreta la evidencia del Entregable 3. Las cifras provienen de `results/experimentos/resumen.md`; las tablas completas están en `docs/03_pruebas.md`.
 
+**Dónde se responde cada pregunta de la actividad:**
+
+| Pregunta | Sección |
+|---|---|
+| ¿Qué tan bien se observan las regiones solicitadas en la configuración final? | 1 (hallazgo 1) y 6 |
+| ¿Cómo cambió la calidad de la solución durante el proceso evolutivo? | 3 |
+| ¿Qué diferencias se encontraron entre distintas ejecuciones? | 6 |
+| ¿Qué efecto tuvieron las restricciones espaciales sobre la solución? | 4 |
+| ¿Qué sucede cuando el sistema no puede satisfacer todas las condiciones? | 5 y 9 |
+| ¿Qué limitaciones tiene el criterio utilizado para evaluar las configuraciones? | 11 |
+| ¿Qué evidencia permite afirmar que una solución es mejor que otra? | 2 |
+
 ---
 
 ## 1. Resumen de hallazgos
@@ -46,7 +58,7 @@ Además, el fitness por sí solo no basta. Para saber qué tan buena es una solu
 
 En la ejecución oficial (base, semilla 42):
 
-- **Arranque:** el mejor fitness inicial es 0.2077 y solo el 70% de la población es válida. El algoritmo elimina las configuraciones inválidas rápido: desde la generación 2 el 100% es válido.
+- **Arranque:** el mejor fitness inicial es 0.2077 y solo el 70% de la población es válida. El algoritmo elimina las configuraciones inválidas rápido: desde la generación 2 la población se mantiene entre 95% y 100% válida.
 - **Fase de mejora rápida:** pasa de 1 a 5 regiones cubiertas en 9 generaciones (0.8578).
 - **Meseta:** del 0.9308 de la generación 27 no mejora hasta la generación 119, que es la primera con las 6 regiones cubiertas (0.9388).
 - **Cierre:** el 1.0000 llega en la generación 197, cuando se completa el respaldo de las dos regiones Alta.
@@ -163,7 +175,21 @@ En ningún caso conviene reutilizar sin revisar una solución calculada para otr
 
 ---
 
-## 11. Limitaciones
+## 11. Limitaciones del criterio de evaluación
+
+El fitness mide lo que el modelo puede ver, no todo lo que importaría en una constelación real:
+
+- **Satélites estáticos.** Cada satélite es un punto fijo sobre la Tierra. Un satélite real en órbita baja da la vuelta en unos 100 minutos y vería cada región solo unos minutos por pasada. El fitness mide cobertura geométrica instantánea, no tiempo de revisita.
+- **Alcance circular fijo de 10°.** En la realidad depende de la altitud, del ángulo mínimo de elevación y del sensor. Con otro alcance cambian las conclusiones: con 30°, por ejemplo, un satélite podría ver dos regiones y bastarían menos satélites.
+- **Muestreo de 37 puntos.** La cobertura se mide en pasos de 1/37 ≈ 2.7 %. Alcanza para distinguir cubierta, parcial y sin cubrir, pero no detecta diferencias finas en el borde de una región.
+- **Los pesos son una decisión del equipo, no un dato.** Las prioridades 3/2/1 y el peso de redundancia 0.10 se eligieron y calibraron (sección 7.1). Con otros pesos el algoritmo optimiza otra cosa: con 0.15 llegaba a preferir reforzar Amazonía antes que cubrir Australia.
+- **Las zonas se modelan como conos.** Una zona prohibida bloquea todas las altitudes sobre ella, aunque en la realidad los desechos se concentran en ciertas alturas.
+- **Muchas soluciones con 1.0000.** Un satélite ve completa una región si está a ≤ 7.3° de su centro, así que hay muchas constelaciones distintas con el mismo fitness. El criterio no premia, por ejemplo, alejarse más de las zonas restringidas (margen de seguridad); el margen de 1.34° junto al Objeto B (sección 4) vale lo mismo que uno de 10°.
+- **No hay costo de reubicación.** En el cambio de condiciones (sección 10), mover un satélite 50° o 1° cuesta lo mismo; en una re-planeación real importaría el combustible.
+
+---
+
+## 12. Limitaciones de la validación
 
 - **Alcance de las semillas:** diez semillas (cinco en el barrido de satélites) muestran la tendencia, pero no sustituyen un análisis estadístico formal.
 - **Un solo escenario base:** las conclusiones de P8 a P12 podrían cambiar con otro número de regiones, de zonas o de prioridades.
@@ -173,10 +199,10 @@ En ningún caso conviene reutilizar sin revisar una solución calculada para otr
 
 ---
 
-## 12. Conclusiones
+## 13. Conclusiones
 
 1. El algoritmo cumple lo que pide la actividad: cubre las 6 regiones, respeta zonas y posiciones ocupadas en todas las soluciones finales (0 de 90 inválidas) y se comporta correctamente cuando la condición es imposible.
 2. Una buena solución no se reconoce solo por su fitness: debe ser válida, cubrir más regiones antes que reforzar las ya cubiertas y compararse contra una referencia o contra varias semillas.
 3. Detener la búsqueda al dejar de mejorar es una decisión de configuración, no una prueba de optimalidad; por eso el criterio de paro se elevó a 150 generaciones.
 4. La batería de pruebas sirvió para algo más que confirmar que todo funciona: encontró dos defectos reales (peso de redundancia y criterio de paro), y ambos se corrigieron con evidencia del antes y el después.
-5. Las limitaciones están declaradas (sección 11) y ninguna cifra de este documento se obtuvo fuera del programa.
+5. Las limitaciones están declaradas (secciones 11 y 12) y ninguna cifra de este documento se obtuvo fuera del programa.
