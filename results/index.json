@@ -6,5 +6,37 @@
   "fitness": 1.0,
   "valida": true,
   "regiones_cubiertas": 6
+ },
+ {
+  "archivo": "inviable_s42.json",
+  "escenario": "inviable",
+  "semilla": 42,
+  "fitness": 0.742308,
+  "valida": true,
+  "regiones_cubiertas": 5
+ },
+ {
+  "archivo": "prioridades_cambiadas_s42.json",
+  "escenario": "prioridades_cambiadas",
+  "semilla": 42,
+  "fitness": 1.0,
+  "valida": true,
+  "regiones_cubiertas": 6
+ },
+ {
+  "archivo": "reducido_s42.json",
+  "escenario": "reducido",
+  "semilla": 42,
+  "fitness": 1.0,
+  "valida": true,
+  "regiones_cubiertas": 6
+ },
+ {
+  "archivo": "sin_restricciones_s42.json",
+  "escenario": "sin_restricciones",
+  "semilla": 42,
+  "fitness": 1.0,
+  "valida": true,
+  "regiones_cubiertas": 6
  }
 ]

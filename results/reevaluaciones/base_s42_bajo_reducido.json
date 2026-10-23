@@ -1,0 +1,183 @@
+{
+ "origen": "results/base_s42.json",
+ "escenario_nuevo": "reducido",
+ "antes": {
+  "fitness": 1.0,
+  "valida": true,
+  "violacion": 0.0,
+  "cobertura_ponderada": 1.0,
+  "redundancia_alta": 1.0,
+  "regiones_cubiertas": 6,
+  "regiones": [
+   {
+    "id": "yucatan",
+    "nombre": "Península de Yucatán, México",
+    "prioridad": "alta",
+    "peso": 3.0,
+    "cobertura": 1.0,
+    "redundancia": 1.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     0,
+     1
+    ]
+   },
+   {
+    "id": "amazonia",
+    "nombre": "Amazonía brasileña",
+    "prioridad": "alta",
+    "peso": 3.0,
+    "cobertura": 1.0,
+    "redundancia": 1.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     2,
+     3
+    ]
+   },
+   {
+    "id": "california",
+    "nombre": "California, Estados Unidos",
+    "prioridad": "media",
+    "peso": 2.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     6
+    ]
+   },
+   {
+    "id": "sahel",
+    "nombre": "Región del Sahel, África",
+    "prioridad": "media",
+    "peso": 2.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     5
+    ]
+   },
+   {
+    "id": "japon",
+    "nombre": "Japón",
+    "prioridad": "media",
+    "peso": 2.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     7
+    ]
+   },
+   {
+    "id": "australia",
+    "nombre": "Interior de Australia",
+    "prioridad": "normal",
+    "peso": 1.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     4
+    ]
+   }
+  ],
+  "violaciones": [],
+  "suficientemente_buena": true
+ },
+ "ahora": {
+  "fitness": 1.0,
+  "valida": false,
+  "violacion": 3.516979,
+  "cobertura_ponderada": 1.0,
+  "redundancia_alta": 1.0,
+  "regiones_cubiertas": 6,
+  "regiones": [
+   {
+    "id": "yucatan",
+    "nombre": "Península de Yucatán, México",
+    "prioridad": "alta",
+    "peso": 3.0,
+    "cobertura": 1.0,
+    "redundancia": 1.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     0,
+     1
+    ]
+   },
+   {
+    "id": "amazonia",
+    "nombre": "Amazonía brasileña",
+    "prioridad": "alta",
+    "peso": 3.0,
+    "cobertura": 1.0,
+    "redundancia": 1.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     2,
+     3
+    ]
+   },
+   {
+    "id": "california",
+    "nombre": "California, Estados Unidos",
+    "prioridad": "media",
+    "peso": 2.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     6
+    ]
+   },
+   {
+    "id": "sahel",
+    "nombre": "Región del Sahel, África",
+    "prioridad": "media",
+    "peso": 2.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     5
+    ]
+   },
+   {
+    "id": "japon",
+    "nombre": "Japón",
+    "prioridad": "media",
+    "peso": 2.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     7
+    ]
+   },
+   {
+    "id": "australia",
+    "nombre": "Interior de Australia",
+    "prioridad": "normal",
+    "peso": 1.0,
+    "cobertura": 1.0,
+    "redundancia": 0.0,
+    "cubierta": true,
+    "satelites_que_ven": [
+     4
+    ]
+   }
+  ],
+  "violaciones": [
+   {
+    "satelite": 7,
+    "tipo": "desechos",
+    "zona": "mar_de_japon",
+    "invasion_grados": 3.517
+   }
+  ],
+  "suficientemente_buena": false
+ }
+}
