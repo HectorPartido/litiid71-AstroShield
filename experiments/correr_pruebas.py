@@ -19,8 +19,8 @@ Pruebas:
   P8 Prueba propia A              ¿sirve la mutación de reubicación? (ablación)
   P9 Prueba propia B              ¿cuántos satélites hacen falta? (4 a 8)
   P10 Cambio de condiciones 3.3   reevaluar base_s42 bajo condiciones nuevas
-  P11 Prueba propia C             calibración del peso de redundancia
-  P12 Prueba propia D             criterio de paro: paciencia 80 vs 150
+  P11 Prueba propia C             calibración del peso de redundancia (0.15 vs 0.10)
+  P12 Prueba propia D             criterio de paro: paciencia 80 (original) vs 150
 
 Uso (desde la raíz del repo; tarda de 4 a 15 minutos según los núcleos del CPU):
     python experiments/correr_pruebas.py
@@ -40,7 +40,6 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from astroshield import fitness as fit_mod
 from astroshield.cli import guardar_resultado
 from astroshield.escenario import cargar_escenario
 from astroshield.fitness import Evaluador
@@ -54,10 +53,6 @@ FIGURAS = RAIZ / "docs" / "figuras"
 SEMILLAS = list(range(1, 11))          # 10 semillas para comparar ejecuciones
 SEMILLAS_BARRIDO = list(range(1, 6))   # 5 semillas por cada número de satélites
 OFICIALES = ["base", "sin_restricciones", "reducido", "inviable", "prioridades_cambiadas"]
-
-# P11: peso actual (el que está en fitness.py) contra un peso alternativo
-PESO_ACTUAL = fit_mod.PESO_REDUNDANCIA
-PESO_ALTERNATIVO = 0.10 if abs(PESO_ACTUAL - 0.10) > 1e-9 else 0.15
 
 
 # ---------------------------------------------------------------- utilidades
@@ -74,24 +69,12 @@ def margenes(sats: np.ndarray, esc) -> dict:
 
 def trabajo(tarea: dict) -> dict:
     """Corre UNA ejecución del algoritmo. Se ejecuta en paralelo."""
-    from astroshield import fitness as fm   # copia del módulo en ESTE proceso
-
     esc = cargar_escenario(ESC / f"{tarea['escenario']}.json")
     if tarea.get("satelites"):
         esc.num_satelites = tarea["satelites"]
-
-    # Ajustes a constantes del módulo fitness (p. ej. PESO_REDUNDANCIA).
-    # Se guardan y restauran para que no "se peguen" a la siguiente tarea del worker.
-    ajustes = tarea.get("ajustes", {})
-    originales = {k: getattr(fm, k) for k in ajustes}
-    try:
-        for nombre, valor in ajustes.items():
-            setattr(fm, nombre, valor)
-        res = AlgoritmoEvolutivo(esc, semilla=tarea["semilla"], **tarea.get("cambios", {})).ejecutar()
-    finally:
-        for nombre, valor in originales.items():
-            setattr(fm, nombre, valor)
-
+    for atributo, valor in tarea.get("ajustes", {}).items():   # p. ej. peso_redundancia
+        setattr(esc, atributo, valor)
+    res = AlgoritmoEvolutivo(esc, semilla=tarea["semilla"], **tarea.get("cambios", {})).ejecutar()
     fin = res["final"]["evaluacion"]
     sats = np.array([[s["lat"], s["lon"]] for s in res["final"]["satelites"]])
     fila = {
@@ -186,11 +169,10 @@ def main():
     guardar_csv([b["fila"] for b in barrido], "barrido_satelites.csv")
 
     # ---------- P11: calibración del peso de redundancia ----------
-    print(f"     Calibración: peso de redundancia {PESO_ALTERNATIVO} (actual: {PESO_ACTUAL})...")
+    print("     Calibración: peso de redundancia 0.15...")
     calibracion = correr_en_paralelo([
-        {"experimento": "calibracion", "escenario": "base",
-         "variante": f"peso_redundancia_{PESO_ALTERNATIVO}",
-         "semilla": s, "ajustes": {"PESO_REDUNDANCIA": PESO_ALTERNATIVO}} for s in SEMILLAS])
+        {"experimento": "calibracion", "escenario": "base", "variante": "peso_redundancia_0.15",
+         "semilla": s, "ajustes": {"peso_redundancia": 0.15}} for s in SEMILLAS])
     guardar_csv([c["fila"] for c in calibracion], "calibracion_peso_redundancia.csv")
 
     # ---------- P12: criterio de paro ----------
@@ -306,7 +288,7 @@ def main():
 
     # Máximo teórico en el escenario inviable: Yucatán imposible
     total = sum(esc_base.peso(r) for r in esc_base.regiones)
-    wr = fit_mod.PESO_REDUNDANCIA            # peso real usado en las corridas
+    wr = esc_base.peso_redundancia
     max_inviable = (1 - wr) * (total - 3) / total + wr * 0.5
     fit_inv = [c["fila"]["fitness_final"] for c in por_esc["inviable"]]
     md.append(f"\n**P6. Máximo teórico del escenario inviable:** si Yucatán (peso 3 de {total:.0f}) no se puede ver, "
@@ -397,20 +379,17 @@ def main():
                         "Violaciones", "Fitness al re-ejecutar (s42)"], filas))
 
     # ---------- P11 ----------
-    c_alt = [c["fila"] for c in calibracion]
-    c_act = [c["fila"] for c in por_esc["base"]]
+    c15 = [c["fila"] for c in calibracion]
+    c10 = [c["fila"] for c in por_esc["base"]]
     md.append("\n## P11. Prueba propia C — calibración del peso de redundancia\n")
-    md.append("Mismo escenario base y mismas 10 semillas; solo cambia `PESO_REDUNDANCIA`. "
-              "Se comparan métricas de cobertura (el fitness no es comparable entre pesos distintos).\n")
-    md.append(tabla_md(["PESO_REDUNDANCIA", "Corridas con 6/6", "Corridas que abandonan Australia",
-                        "Cobertura prom. Australia", "Redundancia Alta prom.", "Suficientemente buena"],
+    md.append("Mismo escenario base y mismas 10 semillas; solo cambia `peso_redundancia`.\n")
+    md.append(tabla_md(["peso_redundancia", "Corridas con 6/6", "Corridas que abandonan Australia",
+                        "Cobertura prom. Australia", "Suficientemente buena"],
                        [[w_, sum(x["regiones_cubiertas"] == 6 for x in f_),
                          sum(x["cob_australia"] < 0.9 for x in f_),
                          f"{np.mean([x['cob_australia'] for x in f_]):.0%}",
-                         f"{np.mean([x['redundancia_alta'] for x in f_]):.2f}",
                          sum(x["gen_suficiente"] is not None for x in f_)]
-                        for w_, f_ in [(f"{PESO_ACTUAL} (actual en fitness.py)", c_act),
-                                       (f"{PESO_ALTERNATIVO} (variante)", c_alt)]]))
+                        for w_, f_ in [("0.15 (original)", c15), ("0.10 (actual)", c10)]]))
 
     # ---------- P12 ----------
     p80 = {c["fila"]["semilla"]: c["fila"] for c in paro}

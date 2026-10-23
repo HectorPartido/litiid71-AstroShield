@@ -11,7 +11,7 @@
   "archivo": "inviable_s42.json",
   "escenario": "inviable",
   "semilla": 42,
-  "fitness": 0.728846,
+  "fitness": 0.742308,
   "valida": true,
   "regiones_cubiertas": 5
  },
@@ -27,9 +27,9 @@
   "archivo": "reducido_s42.json",
   "escenario": "reducido",
   "semilla": 42,
-  "fitness": 0.934615,
+  "fitness": 1.0,
   "valida": true,
-  "regiones_cubiertas": 5
+  "regiones_cubiertas": 6
  },
  {
   "archivo": "sin_restricciones_s42.json",
