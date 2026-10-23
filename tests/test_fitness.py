@@ -46,8 +46,7 @@ def test_region_sin_satelite_no_esta_cubierta(evaluador):
     aus = next(r for r in e.regiones if r["id"] == "australia")
     assert aus["cobertura"] == 0.0 and not aus["cubierta"]
     assert e.regiones_cubiertas == 5
-    # pierde exactamente 0.85 * 1/13 (peso Normal / suma de pesos)
-    assert e.fitness == pytest.approx(1.0 - 0.85 * 1 / 13, abs=1e-6)
+    assert e.fitness == pytest.approx(1.0 - evaluador.w_cob * 1 / 13, abs=1e-6)
 
 
 def test_prioridad_alta_pesa_mas_que_normal(evaluador):
@@ -75,10 +74,24 @@ def test_redundancia_solo_cuenta_regiones_alta(evaluador):
     e = evaluador.evaluar(sin_respaldo)
     assert e.cobertura_ponderada == pytest.approx(1.0)
     assert e.redundancia_alta == 0.0
-    assert e.fitness == pytest.approx(0.85)
+    assert e.fitness == pytest.approx(evaluador.w_cob)
 
 
 def test_satelites_en_cualquier_orden_dan_el_mismo_fitness(evaluador):
     rng = np.random.default_rng(0)
     revuelta = IDEAL[rng.permutation(8)]
     assert evaluador.evaluar(revuelta).fitness == evaluador.evaluar(IDEAL).fitness
+
+def test_cubrir_una_region_nueva_vale_mas_que_un_respaldo(evaluador):
+    """6 regiones + respaldo solo en Yucatán  >  5 regiones (sin Australia) + doble respaldo.
+    Con peso_redundancia = 0.15 esta prueba FALLABA (0.925 < 0.9346): el
+    algoritmo prefería reforzar Amazonía antes que cubrir Australia."""
+    seis_regiones = IDEAL.copy()
+    seis_regiones[7] = [-60.0, 30.0]                  # se pierde el respaldo de Amazonía
+    cinco_regiones = IDEAL.copy()
+    cinco_regiones[5] = [-0.5, -62.0]                 # Australia se abandona para respaldar
+    a = evaluador.evaluar(seis_regiones, detalle=True)
+    b = evaluador.evaluar(cinco_regiones, detalle=True)
+    assert a.valida and b.valida
+    assert a.regiones_cubiertas == 6 and b.regiones_cubiertas == 5
+    assert a.fitness > b.fitness

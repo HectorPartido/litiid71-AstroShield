@@ -8,7 +8,8 @@ Modelo de cobertura:
   - La región está CUBIERTA si cobertura >= umbral_cobertura (0.9).
 
 Fitness (entre 0 y 1, solo tiene sentido para configuraciones válidas):
-    fitness = 0.85 * cobertura_ponderada + 0.15 * redundancia_alta
+    fitness = (1 - w) * cobertura_ponderada + w * redundancia_alta
+  con w = `peso_redundancia` del escenario (0.10 por defecto):
   cobertura_ponderada = Σ peso_r · cobertura_r / Σ peso_r   (pesos 3/2/1)
   redundancia_alta    = promedio, en regiones de prioridad Alta, de la
                         fracción de puntos vistos por 2 o más satélites.
@@ -16,6 +17,11 @@ Fitness (entre 0 y 1, solo tiene sentido para configuraciones válidas):
 La redundancia le da un uso a los 2 satélites "sobrantes" (8 satélites,
 6 regiones): respaldar las regiones más importantes.
 
+Por qué w = 0.10 y no 0.15: con 0.15, respaldar media región Alta
+(0.15 · 0.5 = 0.075) valía MÁS que cubrir Australia (0.85 · 1/13 = 0.065), y
+el algoritmo prefería dejar Australia sin cubrir. Con 0.10 cubrir cualquier
+región nueva (≥ 0.9 · 1/13 = 0.069) vale más que medio respaldo (0.05).
+La prueba P11 de experiments/correr_pruebas.py compara ambos valores.
 Responsable: Hector Martínez Sánchez
 """
 from __future__ import annotations
@@ -26,9 +32,6 @@ import numpy as np
 
 from .geo import distancia_angular, muestrear_disco
 from .restricciones import calcular_violaciones
-
-PESO_COBERTURA = 0.85
-PESO_REDUNDANCIA = 0.15
 
 
 @dataclass
@@ -63,6 +66,8 @@ class Evaluador:
         self.pts_region = np.concatenate(idx)
         self.pesos = np.array([escenario.peso(r) for r in escenario.regiones])
         self.es_alta = np.array([r.prioridad == "alta" for r in escenario.regiones])
+        self.w_red = float(escenario.peso_redundancia)
+        self.w_cob = 1.0 - self.w_red
         self.evaluaciones = 0           # contador (sirve para comparar costo)
 
     def vistas_por_punto(self, satelites: np.ndarray) -> np.ndarray:
@@ -87,8 +92,7 @@ class Evaluador:
 
         cob_pond = float(np.sum(self.pesos * cobertura) / np.sum(self.pesos))
         red_alta = float(np.mean(redundancia[self.es_alta])) if self.es_alta.any() else 0.0
-        fitness = PESO_COBERTURA * cob_pond + PESO_REDUNDANCIA * red_alta
-
+        fitness = self.w_cob * cob_pond + self.w_red * red_alta
         violacion, lista_viol = calcular_violaciones(satelites, self.esc)
         valida = violacion == 0.0
         cubiertas = cobertura >= self.esc.umbral_cobertura
