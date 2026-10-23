@@ -1,0 +1,11 @@
+experimento,escenario,variante,satelites,semilla,fitness_inicial,fitness_final,valida,violacion,cobertura_ponderada,redundancia_alta,regiones_cubiertas,gen_suficiente,generaciones,tiempo_s,cob_yucatan,cob_amazonia,cob_california,cob_sahel,cob_japon,cob_australia,margen_atlantico_norte,margen_pacifico_sur,margen_polar_norte,margen_objeto_a,margen_objeto_b
+calibracion,base,peso_redundancia_0.1,8,1,0.196154,0.95,True,0.0,1.0,1.0,6,86,172,5.323,1.0,1.0,1.0,1.0,1.0,1.0,23.878,46.915,45.492,43.278,15.542
+calibracion,base,peso_redundancia_0.1,8,2,0.227963,0.9,True,0.0,1.0,0.5,6,19,99,3.357,1.0,1.0,1.0,1.0,1.0,1.0,34.521,42.863,48.232,17.034,17.598
+calibracion,base,peso_redundancia_0.1,8,3,0.21736,0.95,True,0.0,1.0,1.0,6,76,156,5.057,1.0,1.0,1.0,1.0,1.0,1.0,28.162,45.959,44.242,43.664,21.995
+calibracion,base,peso_redundancia_0.1,8,4,0.326923,0.95,True,0.0,1.0,1.0,6,12,193,5.544,1.0,1.0,1.0,1.0,1.0,1.0,34.589,47.966,45.016,35.913,23.333
+calibracion,base,peso_redundancia_0.1,8,5,0.236798,0.95,True,0.0,1.0,1.0,6,16,123,4.277,1.0,1.0,1.0,1.0,1.0,1.0,28.662,47.267,48.598,37.79,24.135
+calibracion,base,peso_redundancia_0.1,8,6,0.29158,0.95,True,0.0,1.0,1.0,6,18,108,3.89,1.0,1.0,1.0,1.0,1.0,1.0,33.356,45.698,52.682,38.694,18.792
+calibracion,base,peso_redundancia_0.1,8,7,0.250936,0.9,True,0.0,1.0,0.5,6,15,98,3.465,1.0,1.0,1.0,1.0,1.0,1.0,5.306,51.673,44.2,36.875,20.844
+calibracion,base,peso_redundancia_0.1,8,8,0.302807,0.95,True,0.0,1.0,1.0,6,72,168,5.257,1.0,1.0,1.0,1.0,1.0,1.0,33.959,46.464,51.216,33.749,20.568
+calibracion,base,peso_redundancia_0.1,8,9,0.196154,0.95,True,0.0,1.0,1.0,6,19,200,5.747,1.0,1.0,1.0,1.0,1.0,1.0,30.92,42.98,47.193,40.382,20.415
+calibracion,base,peso_redundancia_0.1,8,10,0.206757,0.9,True,0.0,1.0,0.5,6,13,99,3.633,1.0,1.0,1.0,1.0,1.0,1.0,28.081,45.038,50.334,39.589,25.946

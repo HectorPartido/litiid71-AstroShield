@@ -135,7 +135,7 @@
  "generaciones_ejecutadas": 120,
  "gen_suficiente": 32,
  "evaluaciones": 7262,
- "tiempo_s": 7.531,
+ "tiempo_s": 2.598,
  "inicial": {
   "satelites": [
    {

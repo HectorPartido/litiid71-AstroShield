@@ -1,0 +1,11 @@
+experimento,escenario,variante,satelites,semilla,fitness_inicial,fitness_final,valida,violacion,cobertura_ponderada,redundancia_alta,regiones_cubiertas,gen_suficiente,generaciones,tiempo_s,cob_yucatan,cob_amazonia,cob_california,cob_sahel,cob_japon,cob_australia,margen_atlantico_norte,margen_pacifico_sur,margen_polar_norte,margen_objeto_a,margen_objeto_b
+ablacion,base,sin_reubicacion,8,1,0.196154,0.934615,True,0.0,0.923077,1.0,5,,153,4.678,1.0,1.0,1.0,1.0,1.0,0.0,29.049,47.188,51.929,37.824,34.365
+ablacion,base,sin_reubicacion,8,2,0.227963,0.925,True,0.0,1.0,0.5,6,12,92,3.496,1.0,1.0,1.0,1.0,1.0,1.0,31.32,19.951,50.502,39.708,14.057
+ablacion,base,sin_reubicacion,8,3,0.21736,0.869231,True,0.0,0.846154,1.0,5,,100,3.585,1.0,1.0,1.0,0.0,1.0,1.0,31.832,42.972,49.492,60.494,22.343
+ablacion,base,sin_reubicacion,8,4,0.326923,0.925,True,0.0,1.0,0.5,6,11,97,3.455,1.0,1.0,1.0,1.0,1.0,1.0,32.603,33.854,48.788,41.027,13.66
+ablacion,base,sin_reubicacion,8,5,0.236798,0.934615,True,0.0,0.923077,1.0,5,,99,3.658,1.0,1.0,1.0,1.0,1.0,0.0,32.582,44.23,48.7,39.525,54.395
+ablacion,base,sin_reubicacion,8,6,0.29158,0.925,True,0.0,1.0,0.5,6,12,94,3.572,1.0,1.0,1.0,1.0,1.0,1.0,29.718,11.285,51.862,37.11,22.947
+ablacion,base,sin_reubicacion,8,7,0.250936,0.859615,True,0.0,0.923077,0.5,5,,93,3.387,1.0,1.0,1.0,1.0,1.0,0.0,33.674,49.801,46.391,41.42,51.694
+ablacion,base,sin_reubicacion,8,8,0.307536,0.934615,True,0.0,0.923077,1.0,5,,127,3.966,1.0,1.0,1.0,1.0,1.0,0.0,22.837,46.386,51.439,23.614,46.561
+ablacion,base,sin_reubicacion,8,9,0.196154,0.673077,True,0.0,0.615385,1.0,3,,90,3.297,1.0,1.0,0.0,1.0,0.0,0.0,23.801,20.359,53.89,41.726,81.228
+ablacion,base,sin_reubicacion,8,10,0.206757,0.859615,True,0.0,0.923077,0.5,5,,95,3.507,1.0,1.0,1.0,1.0,1.0,0.0,35.098,44.338,28.763,34.909,55.574

@@ -26,9 +26,12 @@ import numpy as np
 
 from .geo import distancia_angular, muestrear_disco
 from .restricciones import calcular_violaciones
+from astroshield import fitness as fit_mod
+
 
 PESO_COBERTURA = 0.85
 PESO_REDUNDANCIA = 0.15
+wr = fit_mod.PESO_REDUNDANCIA
 
 
 @dataclass
