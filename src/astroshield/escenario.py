@@ -17,14 +17,14 @@ from .geo import km_a_grados
 
 PARAMETROS_GA_DEFECTO = {
     "poblacion": 60,
-    "generaciones": 200,
+    "generaciones": 300,
     "prob_cruza": 0.9,
     "prob_mutacion": 0.15,
     "sigma_mutacion": 5.0,
     "prob_reubicar": 0.03,
     "torneo_k": 3,
     "elitismo": 2,
-    "paciencia": 80,
+    "paciencia": 150,
     "semilla": 42,
 }
 
