@@ -7,6 +7,7 @@
     "separacion_minima_grados": 2.0,
     "radio_region_km": 300,
     "umbral_cobertura": 0.9,
+    "peso_redundancia": 0.10,
     "pesos_prioridad": {
         "alta": 3,
         "media": 2,
@@ -97,14 +98,14 @@
     ],
     "ga": {
         "poblacion": 60,
-        "generaciones": 200,
+        "generaciones": 300,
         "prob_cruza": 0.9,
         "prob_mutacion": 0.15,
         "sigma_mutacion": 5.0,
         "prob_reubicar": 0.03,
         "torneo_k": 3,
         "elitismo": 2,
-        "paciencia": 80,
+        "paciencia": 150,
         "semilla": 42
     },
     "criterio_suficiente": {

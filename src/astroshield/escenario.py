@@ -17,14 +17,14 @@ from .geo import km_a_grados
 
 PARAMETROS_GA_DEFECTO = {
     "poblacion": 60,
-    "generaciones": 200,
+    "generaciones": 300,
     "prob_cruza": 0.9,
     "prob_mutacion": 0.15,
     "sigma_mutacion": 5.0,
     "prob_reubicar": 0.03,
     "torneo_k": 3,
     "elitismo": 2,
-    "paciencia": 80,
+    "paciencia": 150,
     "semilla": 42,
 }
 
@@ -63,6 +63,7 @@ class Escenario:
     zonas: list                                  # desechos + ocupados
     ga: dict = field(default_factory=dict)
     criterio_suficiente: dict = field(default_factory=dict)
+    peso_redundancia: float = 0.10              # peso del respaldo en el fitness
 
     @property
     def radio_region_grados(self) -> float:
@@ -82,6 +83,7 @@ class Escenario:
             "separacion_minima_grados": self.separacion_minima_grados,
             "radio_region_km": self.radio_region_km,
             "umbral_cobertura": self.umbral_cobertura,
+            "peso_redundancia": self.peso_redundancia,
             "pesos_prioridad": dict(self.pesos_prioridad),
             "regiones": [asdict(r) for r in self.regiones],
             "zonas_restringidas": [asdict(z) for z in self.zonas if z.tipo == "desechos"],
@@ -115,6 +117,11 @@ def escenario_desde_dict(datos: dict) -> Escenario:
 
     if int(datos["num_satelites"]) < 1:
         raise ValueError("num_satelites debe ser al menos 1")
+    
+    peso_red = float(datos.get("peso_redundancia", 0.10))
+    if not 0.0 <= peso_red < 1.0:
+        raise ValueError("peso_redundancia debe estar en [0, 1)")
+    
 
     return Escenario(
         nombre=datos["nombre"],
@@ -130,6 +137,7 @@ def escenario_desde_dict(datos: dict) -> Escenario:
         zonas=zonas,
         ga=ga,
         criterio_suficiente=criterio,
+        peso_redundancia=peso_red,
     )
 
 

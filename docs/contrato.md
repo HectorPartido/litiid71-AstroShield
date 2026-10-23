@@ -34,8 +34,7 @@ config/escenarios/*.json ──► escenario.py ──► fitness.py ◄── r
 
 | Campo | Tipo | Significado |
 |---|---|---|
-| `fitness` | float [0,1] | 0.85·cobertura_ponderada + 0.15·redundancia_alta |
-| `valida` | bool | `violacion == 0` |
+| `fitness` | float [0,1] | (1−w)·cobertura_ponderada + w·redundancia_alta, con w = `peso_redundancia` (0.10) || `valida` | bool | `violacion == 0` |
 | `violacion` | float | Suma de grados de invasión |
 | `cobertura_ponderada` | float [0,1] | |
 | `redundancia_alta` | float [0,1] | |
@@ -52,7 +51,7 @@ Cada elemento de `regiones`:
 ```json
 {
   "escenario": { "...todo el escenario usado, incluye regiones, zonas_restringidas, objetos_ocupados..." },
-  "parametros": { "poblacion": 60, "generaciones": 200, "...": "..." },
+  "parametros": { "poblacion": 60, "generaciones": 300, "...": "..." },
   "semilla": 42,
   "generaciones_ejecutadas": 120,
   "gen_suficiente": 32,

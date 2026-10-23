@@ -47,12 +47,12 @@ Las prioridades se traducen en **pesos**: Alta = 3, Media = 2, Normal = 1. Así 
 cobertura_ponderada = Σ (peso_r × cobertura_r) / Σ peso_r          ∈ [0, 1]
 redundancia_alta    = promedio de redundancia_r en regiones Alta    ∈ [0, 1]
 
-fitness = 0.85 × cobertura_ponderada + 0.15 × redundancia_alta      ∈ [0, 1]
+fitness = 0.90 × cobertura_ponderada + 0.10 × redundancia_alta      ∈ [0, 1]
 ```
 
 - **Por qué la redundancia:** hay 8 satélites y 6 regiones. Sin este término, los 2 satélites sobrantes no aportarían nada y el algoritmo los dejaría en cualquier lugar. Con él, se usan para respaldar las regiones más importantes (si un satélite falla, la región Alta sigue vigilada).
-- **Por qué 0.85 / 0.15:** cubrir una región Media aporta 0.85 × 2/13 ≈ 0.131. Duplicar una región Alta aporta 0.15 × ½ = 0.075. Así **cubrir una región nueva siempre vale más que reforzar una ya cubierta**, y el algoritmo prioriza la cobertura.
-- Una configuración perfecta (6 regiones cubiertas al 100 % y ambas Alta con doble satélite) tiene fitness = 1.0.
+- **Por qué 0.90 / 0.10:** el peso del respaldo es el parámetro `peso_redundancia` del escenario. Cubrir la región de menor peso (Australia, Normal) aporta 0.90 × 1/13 ≈ 0.069. Respaldar por completo una región Alta aporta 0.10 × ½ = 0.05. Así **cubrir una región nueva siempre vale más que reforzar una ya cubierta**.
+- **Corrección tras las pruebas:** la primera versión usaba 0.85 / 0.15. Con esos pesos, el respaldo de una región Alta (0.075) valía más que cubrir Australia (0.065). En 3 de 10 ejecuciones el algoritmo dejó Australia sin cubrir para poner un segundo satélite sobre Amazonía. La prueba P11 del Entregable 3 documenta el antes y el después.
 
 ## 4. Configuraciones inválidas
 
@@ -102,15 +102,16 @@ Algoritmo genético generacional con elitismo:
 | `radio_region_km` | 300 | Dato de la actividad |
 | `umbral_cobertura` | 0.9 | Ver sección 2 |
 | `separacion_minima_grados` | 2° | Decisión del equipo |
+| `peso_redundancia` | 0.10 | Ver sección 3 (calibrado con la prueba P11) |
 | `poblacion` | 60 | Alrededor de 7 veces el número de satélites. Evaluar 60 individuos tarda milisegundos. |
-| `generaciones` | 200 | En pruebas preliminares la mejora se detiene antes de la generación 150 |
+| `generaciones` | 300 | Límite superior. Se subió de 200 a 300 junto con la paciencia (ver prueba P12). |
 | `prob_cruza` | 0.9 | Valor típico de la literatura de AG |
 | `prob_mutacion` | 0.15 | ≈ 1/8 satélites → en promedio 1 satélite mutado por hijo |
 | `sigma_mutacion` | 5° | Menor que el radio de visión (10°): ajusta sin "perder" la región |
 | `prob_reubicar` | 0.03 | Pequeña: exploración ocasional sin destruir buenas soluciones |
 | `torneo_k` | 3 | Presión selectiva moderada |
 | `elitismo` | 2 | Conserva las 2 mejores |
-| `paciencia` | 80 | Generaciones sin mejora antes de detenerse |
+| `paciencia` | 150 | Generaciones sin mejora antes de detenerse. Con 80, la semilla 42 se detenía en un óptimo local con 5/6 regiones; con 150 alcanza 6/6 (prueba P12). |
 | `semilla` | 42 | Reproducibilidad. Se varía en las pruebas de variación. |
 
 Los valores iniciales se toman de recomendaciones comunes para AG de codificación real y se ajustan con las pruebas del Entregable 3.
