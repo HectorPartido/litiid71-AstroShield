@@ -34,8 +34,7 @@ config/escenarios/*.json ──► escenario.py ──► fitness.py ◄── r
 
 | Campo | Tipo | Significado |
 |---|---|---|
-| `fitness` | float [0,1] | 0.85·cobertura_ponderada + 0.15·redundancia_alta |
-| `valida` | bool | `violacion == 0` |
+| `fitness` | float [0,1] | (1−w)·cobertura_ponderada + w·redundancia_alta, con w = `peso_redundancia` (0.10) || `valida` | bool | `violacion == 0` |
 | `violacion` | float | Suma de grados de invasión |
 | `cobertura_ponderada` | float [0,1] | |
 | `redundancia_alta` | float [0,1] | |
